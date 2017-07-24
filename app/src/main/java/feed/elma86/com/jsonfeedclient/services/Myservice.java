@@ -7,7 +7,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
+import java.io.IOException;
 import java.net.URI;
+
+import feed.elma86.com.jsonfeedclient.model.DataItem;
+import feed.elma86.com.jsonfeedclient.utils.HttpHelper;
 
 import static android.content.ContentValues.TAG;
 
@@ -29,8 +35,21 @@ public class Myservice extends IntentService {
         Uri uri = intent.getData();
         Log.i(TAG, "onhandleIntetent " + uri.toString());
 
+        //use web api endpoint url and put it in httphelper
+        String response;
+        try {
+            response = HttpHelper.downloadUrl(uri.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        Gson gson = new Gson();
+       // DataItem[] dataItem = gson.fromJson(response,DataItem[].class);
+        DataItem[] dataItems = gson.fromJson(response,DataItem[].class);
+
         Intent messageIntent = new Intent(My_SERVICE_MESSAGE);
-        messageIntent.putExtra(My_SERVICE_PAYLOAD,"service all done");
+        messageIntent.putExtra(My_SERVICE_PAYLOAD,dataItems);
 
         LocalBroadcastManager localBroadcastManager =
                 LocalBroadcastManager.getInstance(getApplicationContext());

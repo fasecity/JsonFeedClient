@@ -16,8 +16,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import feed.elma86.com.jsonfeedclient.model.DataItem;
 import feed.elma86.com.jsonfeedclient.services.Myservice;
+import feed.elma86.com.jsonfeedclient.utils.NetworkHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,13 +28,23 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView output;
     private Button displayButton;
+    private boolean networkOk;
 
     //recive broadcast
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String message = intent.getStringExtra(Myservice.My_SERVICE_PAYLOAD);
-            output.append(message + "\n");
+          //  String message = intent.getStringExtra(Myservice.My_SERVICE_PAYLOAD);
+            //GET MY DATA HOE -- gets  data in parcalable strongly typed
+            DataItem[] dataItems = (DataItem[])intent.getParcelableArrayExtra(Myservice.My_SERVICE_PAYLOAD);
+
+            for (DataItem item:dataItems) {
+                output.append(item.getCompany() + "\n");
+
+            };
+
+
+
         }
     };
     @Override
@@ -62,13 +75,17 @@ public class MainActivity extends AppCompatActivity {
         displayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,Myservice.class);
-                intent.setData(Uri.parse(jsonurl));
-                startService(intent);
-                //sends data to Myservice
+                if (networkOk) {
+                    Intent intent = new Intent(MainActivity.this, Myservice.class);
+                    intent.setData(Uri.parse(jsonurl));
+                    startService(intent);
+                    //sends data to Myservice
+                }
+                else
+                    Toast.makeText(MainActivity.this, "you need internet bud", Toast.LENGTH_SHORT).show();
             };
         });
-
+        networkOk = NetworkHelper.hasNetworkAccess(this);
 
     }
 
