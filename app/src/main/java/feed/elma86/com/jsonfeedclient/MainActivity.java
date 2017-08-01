@@ -10,6 +10,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
@@ -17,6 +19,9 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Arrays;
+import java.util.List;
 
 import feed.elma86.com.jsonfeedclient.model.DataItem;
 import feed.elma86.com.jsonfeedclient.services.Myservice;
@@ -26,9 +31,13 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String jsonurl ="http://moesjsonfeedapi.azurewebsites.net/api/values";
 
-    private TextView output;
-    private Button displayButton;
+   // private TextView output;
+   // private Button displayButton;
     private boolean networkOk;
+    List<DataItem> dataItemList;//make into list
+    RecyclerView.LayoutManager layoutManager;
+    DataItemAdapter dataItemAdapter;
+
 
     //recive broadcast
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -38,11 +47,14 @@ public class MainActivity extends AppCompatActivity {
             //GET MY DATA HOE -- gets  data in parcalable strongly typed
             DataItem[] dataItems = (DataItem[])intent.getParcelableArrayExtra(Myservice.My_SERVICE_PAYLOAD);
 
-            for (DataItem item:dataItems) {
-                output.append(item.getCompany() + "\n");
+           for (DataItem item:dataItems) {
+               // output.append(item.getCompany() + "\n");
 
             };
 
+            dataItemList = Arrays.asList(dataItems);//make into list
+            // make recycler view
+            displayDataItems();
 
 
         }
@@ -64,31 +76,55 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //        .setAction("Action", null).show();
-                output.setText("");
+              //  output.setText("");
             }
         });
         //instances linked to xml
-        output = (TextView) findViewById(R.id.output1);
-        displayButton = (Button) findViewById(R.id.displayButton);
+      //  output = (TextView) findViewById(R.id.output1);
+       // displayButton = (Button) findViewById(R.id.displayButton);
 
         //Listneners
-        displayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (networkOk) {
-                    Intent intent = new Intent(MainActivity.this, Myservice.class);
-                    intent.setData(Uri.parse(jsonurl));
-                    startService(intent);
-                    //sends data to Myservice
-                }
-                else
-                    Toast.makeText(MainActivity.this, "you need internet bud", Toast.LENGTH_SHORT).show();
-            };
-        });
+       // displayButton.setOnClickListener(new View.OnClickListener() {
+           // @Override
+        //    public void onClick(View v) {
+//                if (networkOk) {
+//                    Intent intent = new Intent(MainActivity.this, Myservice.class);
+//                    intent.setData(Uri.parse(jsonurl));
+//                    startService(intent);
+//                    //sends data to Myservice
+//              }
+//                else
+//                    Toast.makeText(MainActivity.this, "you need internet bud", Toast.LENGTH_SHORT).show();
+          //  };
+      //  });
         networkOk = NetworkHelper.hasNetworkAccess(this);
+        if (networkOk) {
+            Intent intent = new Intent(MainActivity.this, Myservice.class);
+            intent.setData(Uri.parse(jsonurl));
+            startService(intent);
+            //sends data to Myservice
+        }
+        else
+            Toast.makeText(MainActivity.this, "you need internet bud", Toast.LENGTH_SHORT).show();
+
 
     }
 
+    private void displayDataItems(){
+
+        if (dataItemList != null) {
+            dataItemAdapter = new DataItemAdapter(this,dataItemList);
+         //   rcView.setAdapter(dataItemAdapter);
+            RecyclerView rc = (RecyclerView) findViewById(R.id.rcView);
+            layoutManager = new LinearLayoutManager(this);
+            rc.setHasFixedSize(false);//only use this for fixed ammount
+            rc.setLayoutManager(layoutManager);
+            rc.setAdapter(dataItemAdapter);
+
+        }
+
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
