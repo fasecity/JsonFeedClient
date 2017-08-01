@@ -2,6 +2,7 @@ package feed.elma86.com.jsonfeedclient;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,11 +47,11 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
             holder.titletext.setText(item.getTitle());
             holder.companyText.setText(item.getCompany());
             holder.cityText.setText(item.getCity());
-            holder.salarytext.setText(""+ item.getSalary());
+            holder.salarytext.setText(""+ item.getSalary());//---use "" to cast java is retarded
             holder.descriptionText.setText(item.getDescription());
             holder.responsibilityText.setText(item.getResponsibility());
-            holder.latText.setText(""+ item.getLatitude());
-            holder.lngText.setText(""+ item.getLongitude());
+            holder.latText.setText(""+ item.getLatitude());//---use "" to cast java is retarded
+            holder.lngText.setText(""+ item.getLongitude());//---use "" to cast java is retarded
             holder.phoneText.setText(item.getPhone());
             holder.provinceText.setText(item.getProvince());
         } catch (Exception e) {
@@ -61,11 +62,11 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 //get item id frm dataItem class/2/create intent/3/make string constant and pass in extra
-                 String itemId = item.getTitle(); //non parcable
-                Toast.makeText(mContext, "long click: " + item.getTitle(), Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(mContext,DetailsActivity.class);
-                //intent.putExtra(ITEM_KEY,item);
-               // mContext.startActivity(intent);
+                // String itemId = item.getTitle(); //non parcable
+               // Toast.makeText(mContext, "long click: " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext,DetailsActivity.class);
+                intent.putExtra(ITEM_KEY,item);
+               mContext.startActivity(intent);
             }
         });
         //long click
@@ -96,8 +97,6 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
         public TextView companyText;
         public TextView responsibilityText;
         View mView;
-
-
 
         public ViewHolder(View itemView) {
             super(itemView);
