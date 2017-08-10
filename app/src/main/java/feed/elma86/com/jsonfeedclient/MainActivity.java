@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //        .setAction("Action", null).show();
               //  output.setText("");
+
             }
         });
 
@@ -109,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this,MyMapActivity.class);
+            startActivity(intent);
             return true;
         }
 
