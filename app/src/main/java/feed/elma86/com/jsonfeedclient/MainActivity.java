@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
@@ -26,6 +27,8 @@ import java.util.List;
 import feed.elma86.com.jsonfeedclient.model.DataItem;
 import feed.elma86.com.jsonfeedclient.services.Myservice;
 import feed.elma86.com.jsonfeedclient.utils.NetworkHelper;
+
+import static feed.elma86.com.jsonfeedclient.DataItemAdapter.ITEM_KEY;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -111,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this,MyMapActivity.class);
+
             startActivity(intent);
             return true;
         }

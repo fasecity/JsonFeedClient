@@ -3,6 +3,8 @@ package feed.elma86.com.jsonfeedclient;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +13,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import feed.elma86.com.jsonfeedclient.model.DataItem;
+
+import static android.R.attr.id;
 
 public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHolder> {
 
     //intent constants
     public static final String ITEM_KEY ="item_id_key";//make sure its public
-    //  public static final String ITEM_ID_KEY ="item_id_key" ;//make sure its public
+
     //instance vars
     private List<DataItem> mItems;
     private Context mContext;
@@ -74,6 +79,7 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
             @Override
             public boolean onLongClick(View v) {
                 Toast.makeText(mContext, "long click: " + item.getTitle(), Toast.LENGTH_SHORT).show();
+
                 return false;
             }
         });
