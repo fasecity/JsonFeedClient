@@ -49,10 +49,10 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
 
 
         try {
-            holder.titletext.setText(item.getTitle());
-            holder.companyText.setText(item.getCompany());
-            holder.cityText.setText(item.getCity());
-            holder.salarytext.setText(""+ item.getSalary());//---use "" to cast java is retarded
+            holder.titletext.setText("Type: "+ item.getTitle());
+            holder.companyText.setText("Company: "+ item.getCompany());
+            holder.cityText.setText("City: "+item.getCity());
+            holder.salarytext.setText("$"+ item.getSalary() +"/hour");//---use "" to cast java is retarded
             holder.descriptionText.setText(item.getDescription());
             holder.responsibilityText.setText(item.getResponsibility());
             holder.latText.setText(""+ item.getLatitude());//---use "" to cast java is retarded
