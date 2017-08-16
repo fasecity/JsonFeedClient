@@ -87,7 +87,7 @@ public class MyMapActivity extends AppCompatActivity implements OnMapReadyCallba
         mMap = googleMap;
         LatLng latLngToronto = new LatLng(43.733092, -79.264254);
 
-        CameraPosition target = CameraPosition.builder().target(latLngToronto).zoom(15).tilt(65).build();
+        CameraPosition target = CameraPosition.builder().target(latLngToronto).zoom(9).tilt(65).build();
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(target));
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 

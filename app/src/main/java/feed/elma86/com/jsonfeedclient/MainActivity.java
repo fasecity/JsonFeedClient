@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -21,6 +22,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
@@ -57,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+       // getSupportActionBar().setTitle("Jobify");
+        getSupportActionBar().setIcon(R.drawable.logom);
 
         //revcive
         LocalBroadcastManager.getInstance(getApplicationContext())
@@ -66,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
-              //  output.setText("");
 
+                Intent intent = new Intent(getApplicationContext(),MyMapActivity.class);
+                startActivity(intent);
             }
         });
+
 
         networkOk = NetworkHelper.hasNetworkAccess(this);
         if (networkOk) {

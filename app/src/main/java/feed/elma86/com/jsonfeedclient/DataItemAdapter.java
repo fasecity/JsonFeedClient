@@ -3,16 +3,19 @@ package feed.elma86.com.jsonfeedclient;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Parcelable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +62,12 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
             holder.lngText.setText(""+ item.getLongitude());//---use "" to cast java is retarded
             holder.phoneText.setText(item.getPhone());
             holder.provinceText.setText(item.getProvince());
+
+
+//            InputStream stream = mContext.getAssets().open(item.getImage() + ".png");
+//            Drawable d = Drawable.createFromStream(stream,null);
+//            holder.imageView.setImageDrawable(d);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -102,6 +111,7 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
         public TextView titletext;
         public TextView companyText;
         public TextView responsibilityText;
+        public ImageView imageView;
         View mView;
 
         public ViewHolder(View itemView) {
@@ -116,6 +126,7 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
             titletext =(TextView) itemView.findViewById(R.id.titleText);
             companyText =(TextView) itemView.findViewById(R.id.companyText);
             responsibilityText=(TextView) itemView.findViewById(R.id.responsibilityText);
+            imageView = (ImageView) itemView.findViewById(R.id.imageView);
 
             mView = itemView;
         }
