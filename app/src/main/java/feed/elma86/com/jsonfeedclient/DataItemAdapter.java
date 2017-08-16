@@ -56,12 +56,12 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
             holder.companyText.setText("Company: "+ item.getCompany());
             holder.cityText.setText("City: "+item.getCity());
             holder.salarytext.setText("$"+ item.getSalary() +"/hour");//---use "" to cast java is retarded
-            holder.descriptionText.setText(item.getDescription());
-            holder.responsibilityText.setText(item.getResponsibility());
+            holder.descriptionText.setText("Description: " + item.getDescription());
+            holder.responsibilityText.setText("Responsibility" +item.getResponsibility());
             holder.latText.setText(""+ item.getLatitude());//---use "" to cast java is retarded
             holder.lngText.setText(""+ item.getLongitude());//---use "" to cast java is retarded
-            holder.phoneText.setText(item.getPhone());
-            holder.provinceText.setText(item.getProvince());
+            holder.phoneText.setText("Phone: "+item.getPhone());
+            holder.provinceText.setText("Province: "+item.getProvince());
 
 
 //            InputStream stream = mContext.getAssets().open(item.getImage() + ".png");

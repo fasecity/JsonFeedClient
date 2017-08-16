@@ -59,17 +59,17 @@ public class DetailsActivity extends AppCompatActivity {
         companyText =(TextView) findViewById(R.id.companyText);
         responsibilityText=(TextView) findViewById(R.id.responsibilityText);
 
-        //view sets
-        titletext.setText(item.getTitle());
-        companyText.setText(item.getCompany());
-        cityText.setText(item.getCity());
-        salarytext.setText(""+ item.getSalary());
-        descriptionText.setText(item.getDescription());
-        responsibilityText.setText(item.getResponsibility());
-        latText.setText(""+ item.getLatitude());
-        lngText.setText(""+ item.getLongitude());
-        phoneText.setText(item.getPhone());
-        provinceText.setText(item.getProvince());
+        //sets
+        titletext.setText("Type: "+ item.getTitle());
+        companyText.setText("Company: "+ item.getCompany());
+        cityText.setText("City: "+item.getCity());
+        salarytext.setText("$"+ item.getSalary() +"/hour");//---use "" to cast java is retarded
+        descriptionText.setText("Description: " + item.getDescription());
+        responsibilityText.setText("Responsibility: " +item.getResponsibility());
+        latText.setText("");//---use "" to cast java is retarded
+        lngText.setText("");//---use "" to cast java is retarded
+        phoneText.setText("Phone: "+item.getPhone());
+        provinceText.setText("Province: "+item.getProvince());
     }
 
 }
