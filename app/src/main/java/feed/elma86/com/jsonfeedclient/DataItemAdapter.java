@@ -116,8 +116,6 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
-            latText =(TextView) itemView.findViewById(R.id.latText);
-            lngText =(TextView) itemView.findViewById(R.id.lngText);
             cityText =(TextView) itemView.findViewById(R.id.cityText);
             provinceText =(TextView) itemView.findViewById(R.id.provinceText);
             salarytext =(TextView) itemView.findViewById(R.id.salaryText);
