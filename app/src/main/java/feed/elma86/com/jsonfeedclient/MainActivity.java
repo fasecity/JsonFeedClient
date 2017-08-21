@@ -71,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getApplicationContext(),MyMapActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -118,13 +116,18 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-//            Intent intent = new Intent(this,MyMapActivity.class);
-//
-//            startActivity(intent);
+
+
             return true;
-        }else if(id ==R.id.action_settings_maps){
-            Intent intent = new Intent(this,MyMapActivity.class);
-            startActivity(intent);
+        }
+        else if(id ==R.id.action_settings_maps){
+            //networkOk = NetworkHelper.hasNetworkAccess(this);
+            if (networkOk) {
+                Intent intent = new Intent(this, MyMapActivity.class);
+                startActivity(intent);
+            }
+            else
+                Toast.makeText(this, "You need internet connection to display maps", Toast.LENGTH_SHORT).show();
             return true;
         }
 
