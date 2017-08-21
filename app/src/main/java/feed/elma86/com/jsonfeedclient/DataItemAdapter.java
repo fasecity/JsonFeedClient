@@ -40,7 +40,7 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
     @Override
     public DataItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View itemView = inflater.inflate(R.layout.list_item, parent, false);
+        View itemView = inflater.inflate(R.layout.card_list_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(itemView);
         return viewHolder;
 
